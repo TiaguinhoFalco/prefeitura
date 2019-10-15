@@ -13,6 +13,11 @@ import modelo.Prefeitura;
 import tela.manutencao.ManutencaoPrefeitura;
 
 import tela.manutencao.ManutencaoPrefeitura;
+import java.util.List;
+
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -60,6 +65,28 @@ public class ControladorPrefeitura {
         } else {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
+    }
+    
+    public static void atualizarTabela(JTable tabela) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        //definindo o cabeçalho da tabela
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Número de funcionarios");
+        modelo.addColumn("Fundação");
+        
+        List<Prefeitura> resultados = DaoPrefeitura.consultar();
+        for (Prefeitura objeto : resultados) {
+            Vector linha = new Vector();
+            
+            //definindo o conteúdo da tabela
+            linha.add(objeto.getCodigo());
+            linha.add(objeto.getNome());
+            linha.add(objeto.getNr_funcionarios());
+            linha.add(objeto.getNome());
+            modelo.addRow(linha); //adicionando a linha na tabela
+        }
+        tabela.setModel(modelo);
     }
     
 }
