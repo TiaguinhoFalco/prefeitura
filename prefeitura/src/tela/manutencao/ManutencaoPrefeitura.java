@@ -5,11 +5,14 @@
  */
 package tela.manutencao;
 
+import tela.listagem.ListagemPrefeitura;
+
 /**
  *
  * @author Administrador
  */
 public class ManutencaoPrefeitura extends javax.swing.JDialog {
+     public ListagemPrefeitura listagem;
 
     /**
      * Creates new form ManutencaoPrefeitura
@@ -17,6 +20,25 @@ public class ManutencaoPrefeitura extends javax.swing.JDialog {
     public ManutencaoPrefeitura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        
+    }
+     public ManutencaoPrefeitura(java.awt.Frame parent, boolean modal, ListagemPrefeitura listagem) {
+        super(parent, modal);
+        initComponents();
+        this.listagem = listagem;
+        
+        jtfCodigo.setEnabled(false);  //desabilitando a edição do campo código
+        btnAlterar.setEnabled(false); //desabilitando o botão alterar
+        btnExcluir.setEnabled(false); //desabilitando o botão excluir
+  }
+      public ManutencaoPrefeitura(java.awt.Frame parent, boolean modal, ListagemPrefeitura listagem, int pk) {
+        super(parent, modal);
+        initComponents();
+        
+        jtfCodigo.setEnabled(false);  //desabilitando a edição do campo código
+        this.listagem = listagem;
+        controlador.ControladorPrefeitura.atualizaCampos(this, pk);//pegando os valores do BD e colocando na tela
     }
 
     /**
